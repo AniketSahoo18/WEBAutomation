@@ -1,40 +1,45 @@
 package webpages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import testbase.WebPageFactory;
+import enums.WaitStrategy;
+import testbase.DriverManager;
+import testbase.WaitFactory;
 import utils.TestUtil;
 
-public class HomePage extends WebPageFactory {
+public class HomePage extends TestUtil {
 
-	public HomePage(WebDriver driver) {
+	private final By txtProducts = By.cssSelector(".mb-3");
+	private final By txtProduct = By.cssSelector("b");
+	private final By linkCart = By.cssSelector("[routerlink*='cart']");
+	private final By linkProduct = By.cssSelector(".card-body button:last-of-type");
+	private final By linkPopUp =By.cssSelector("#toast-container");
+	private final By linkAnimation =By.cssSelector(".ng-animating");
 
-		super(driver);
-
-	}
-
-	public CartPage addProductToCart(String productName, WebDriver driver) {
+	public CartPage addProductToCart(String productName) {
 
 		try {
 
-			TestUtil.explicitWait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".mb-3")));
+//			TestUtil.explicitWait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".mb-3")));
 
-			WebElement prod = products.stream()
-					.filter(product -> product.findElement(By.cssSelector("b")).getText().equals(productName))
-					.findFirst().orElse(null);
+			WebElement prod = DriverManager.getDriver().findElements(txtProducts).stream()
+					.filter(product -> getText(product, txtProduct).equals(productName)).findFirst().orElse(null);
 
-			prod.findElement(By.cssSelector(".card-body button:last-of-type")).click();
+			click(prod, linkProduct);
 
-			TestUtil.explicitWait
-					.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#toast-container")));
+//			TestUtil.explicitWait
+//					.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#toast-container")));
+			
+			WaitFactory.performExplicitWait(WaitStrategy.VISIBLE, linkPopUp);
 
-			// ng-animating
-			TestUtil.explicitWait.until(ExpectedConditions.invisibilityOf(ngAnimation));
+//			 ng-animating
+//			TestUtil.explicitWait.until(ExpectedConditions.invisibilityOf(ngAnimation));
+			
+			WaitFactory.performExplicitWait(WaitStrategy.INVISIBLE, linkAnimation);
 
 			// Click Cart
-			cart.click();
+
+			click(linkCart, WaitStrategy.CLICKABLE);
 
 		}
 
@@ -44,6 +49,6 @@ public class HomePage extends WebPageFactory {
 
 		}
 
-		return new CartPage(driver);
+		return new CartPage();
 	}
 }

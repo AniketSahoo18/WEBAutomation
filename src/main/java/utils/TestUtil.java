@@ -1,20 +1,12 @@
 package utils;
 
-import java.io.File;
-import java.io.IOException;
-import java.time.Duration;
-
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import enums.WaitStrategy;
+import testbase.WaitFactory;
 
 public class TestUtil {
-
-	public static WebDriverWait pageLoadWait;
-	public static WebDriverWait explicitWait;
 
 	public static void getUrl(String url, WebDriver driver) {
 
@@ -31,16 +23,6 @@ public class TestUtil {
 
 	}
 
-	public static void getPageLoadWait(int wait, WebDriver driver) {
-
-		pageLoadWait = new WebDriverWait(driver, Duration.ofSeconds(wait));
-	}
-
-	public static void getExplicitWait(int wait, WebDriver driver) {
-
-		explicitWait = new WebDriverWait(driver, Duration.ofSeconds(wait));
-	}
-
 //	public static String getScreenshot(String testCaseName, WebDriver driver) throws IOException {
 //
 //		TakesScreenshot ss = (TakesScreenshot) driver;
@@ -50,13 +32,42 @@ public class TestUtil {
 //		return System.getProperty("user.dir") + "/reports/" + testCaseName + ".png";
 //	}
 
-	public static void sendKeys(WebElement ele, String value) {
+	protected void sendKeys(By by, String value, WaitStrategy waitStrategy) {
 
-		ele.sendKeys(value);
+		WebElement element = WaitFactory.performExplicitWait(waitStrategy, by);
+
+		element.sendKeys(value);
+
 	}
 
-	public static void click(WebElement ele) {
-		
-		ele.click();
+	protected void click(By by, WaitStrategy waitStrategy) {
+
+		WebElement element = WaitFactory.performExplicitWait(waitStrategy, by);
+
+		element.click();
+
 	}
+
+	public static void click(WebElement ele, By by) {
+
+		WebElement element = ele.findElement(by);
+
+		element.click();
+	}
+
+	protected String getText(By by, WaitStrategy waitStrategy) {
+
+		WebElement element = WaitFactory.performExplicitWait(waitStrategy, by);
+
+		return element.getText();
+
+	}
+
+	public static String getText(WebElement ele, By by) {
+
+		WebElement element = ele.findElement(by);
+
+		return element.getText();
+	}
+
 }

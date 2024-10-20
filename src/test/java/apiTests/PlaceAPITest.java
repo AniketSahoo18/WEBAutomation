@@ -7,11 +7,11 @@ import java.util.Map;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import coreUtil.ExcelReportUtil;
-import coreUtil.ReadPropertyFile;
+import coreUtil.PropertyUtil;
 import coreUtil.ValidationUtil;
 import io.restassured.specification.RequestSpecification;
 import pojoResponse.AddPlaceResponse;
+import reports.ExcelReportUtil;
 import requestSpecification.RequestSpec;
 import apiResources.APIResources;
 import apiResources.DBConnection;
@@ -47,11 +47,11 @@ public class PlaceAPITest extends TestBase {
 
 			APIResources resourceAPI = APIResources.valueOf("AddPlaceAPI");
 
-			if (ReadPropertyFile.getValue("requestType").equalsIgnoreCase("POST"))
+			if (PropertyUtil.getValue("requestType").equalsIgnoreCase("POST"))
 				response = res.when().post(resourceAPI.getResource()).as(AddPlaceResponse.class);
-			else if (ReadPropertyFile.getValue("requestType").equalsIgnoreCase("GET"))
+			else if (PropertyUtil.getValue("requestType").equalsIgnoreCase("GET"))
 				response = res.when().get(resourceAPI.getResource()).as(AddPlaceResponse.class);
-			else if (ReadPropertyFile.getValue("requestType").equalsIgnoreCase("DELETE"))
+			else if (PropertyUtil.getValue("requestType").equalsIgnoreCase("DELETE"))
 				response = res.when().get(resourceAPI.getResource()).as(AddPlaceResponse.class);
 
 			// Data fetch from response
@@ -91,11 +91,11 @@ public class PlaceAPITest extends TestBase {
 
 //			resspec = new ResponseSpecBuilder().expectStatusCode(200).expectContentType(ContentType.JSON).build();
 
-			if (ReadPropertyFile.getValue("requestType").equalsIgnoreCase("POST"))
+			if (PropertyUtil.getValue("requestType").equalsIgnoreCase("POST"))
 				response = res.when().post(resourceAPI.getResource()).as(AddPlaceResponse.class);
-			else if (ReadPropertyFile.getValue("requestType").equalsIgnoreCase("GET"))
+			else if (PropertyUtil.getValue("requestType").equalsIgnoreCase("GET"))
 				response = res.when().get(resourceAPI.getResource()).as(AddPlaceResponse.class);
-			else if (ReadPropertyFile.getValue("requestType").equalsIgnoreCase("DELETE"))
+			else if (PropertyUtil.getValue("requestType").equalsIgnoreCase("DELETE"))
 				response = res.when().get(resourceAPI.getResource()).as(AddPlaceResponse.class);
 
 			// Data fetch from response

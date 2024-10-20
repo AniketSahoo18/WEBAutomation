@@ -1,28 +1,20 @@
 package webpages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import testbase.WebPageFactory;
+import enums.WaitStrategy;
 import utils.TestUtil;
 
-public class ConfirmationPage extends WebPageFactory {
+public class ConfirmationPage extends TestUtil {
 
-	String confirmMessage;
+	private final By txtConfirmationMssg = By.cssSelector(".hero-primary");
 
-	public ConfirmationPage(WebDriver driver) {
-
-		super(driver);
-
-	}
+	String confirmationMessage;
 
 	public String getConfirmationMssg() {
 
 		try {
 
-			TestUtil.explicitWait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".hero-primary")));
-
-			confirmMessage = confirmation.getText();
+			confirmationMessage = getText(txtConfirmationMssg, WaitStrategy.VISIBLE);
 
 		}
 
@@ -32,6 +24,6 @@ public class ConfirmationPage extends WebPageFactory {
 
 		}
 
-		return confirmMessage;
+		return confirmationMessage;
 	}
 }

@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
-import coreUtil.ReadPropertyFile;
+import coreUtil.PropertyUtil;
 import utils.TestUtil;
 
 public class TestBase {
@@ -20,14 +20,13 @@ public class TestBase {
 
 			if (Objects.isNull(DriverManager.getDriver())) {
 
-				driver = BrowserFactory.createBrowserInstance(ReadPropertyFile.getValue("browser"),
-						Integer.parseInt(ReadPropertyFile.getValue("driverStartupWait")));
+				driver = BrowserFactory.createBrowserInstance(PropertyUtil.getValue("browser"),
+						Integer.parseInt(PropertyUtil.getValue("driverStartupWait")));
 
 			}
 
-			TestUtil.getUrl(ReadPropertyFile.getValue("url"), driver);
-			TestUtil.getPageLoadWait(Integer.parseInt(ReadPropertyFile.getValue("pageLoadWait")), driver);
-			TestUtil.getExplicitWait(Integer.parseInt(ReadPropertyFile.getValue("driverExplicitWait")), driver);
+			TestUtil.getUrl(PropertyUtil.getValue("url"), driver);
+			WaitFactory.performImplicitWait();
 
 		}
 

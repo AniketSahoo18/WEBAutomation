@@ -1,29 +1,28 @@
 package webpages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import testbase.WebPageFactory;
+import enums.WaitStrategy;
 import utils.TestUtil;
 
-public class CheckoutPage extends WebPageFactory {
+public class CheckoutPage extends TestUtil {
+	
+	private final By txtCountryField = By.cssSelector("[placeholder='Select Country']");
+	private final By searchCountryField = By.cssSelector(".ta-item:nth-of-type(2)");
+	private final By btnPlaceOrder = By.cssSelector(".action__submit");
+	
+	public ConfirmationPage submitOrder() {
+		
+		sendKeys(txtCountryField, "India", WaitStrategy.PRESENCE);
 
-	public CheckoutPage(WebDriver driver) {
+//		TestUtil.explicitWait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ta-results")));
+		
+//		WaitFactory.performExplicitWait(0, driver, );
 
-		super(driver);
+		click(searchCountryField, WaitStrategy.CLICKABLE);
+		click(btnPlaceOrder, WaitStrategy.CLICKABLE);
 
-	}
 
-	public ConfirmationPage submitOrder(WebDriver driver) {
-
-		countryField.sendKeys("India");
-
-		TestUtil.explicitWait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ta-results")));
-
-		country.click();
-		placeOrder.click();
-
-		return new ConfirmationPage(driver);
+		return new ConfirmationPage();
 	}
 
 }

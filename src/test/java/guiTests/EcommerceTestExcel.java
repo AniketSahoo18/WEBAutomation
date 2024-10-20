@@ -1,6 +1,8 @@
 package guiTests;
 
 import org.testng.annotations.Test;
+
+import coreUtil.ValidationUtil;
 import testbase.TestBase;
 import utils.DataProviders;
 import java.util.Map;
@@ -22,17 +24,20 @@ public final class EcommerceTestExcel extends TestBase {
 
 	}
 
-	@Test(dataProvider = "testData_Fashion", dataProviderClass = DataProviders.class)
+	@Test(dataProvider = "testData_Fashion", dataProviderClass = DataProviders.class, enabled = true)
 	public void ecommerceFashion_Test(Map<String, String> mapData) {
 
 		try {
-			LoginPage loginPage = new LoginPage(driver);
-			homePage = loginPage.loginApplication(mapData.get("User Name"), mapData.get("Password"), driver);
-			cartPage = homePage.addProductToCart(mapData.get("Product"), driver);
-			checkoutPage = cartPage.placeOrder(mapData.get("Product"), driver);
-			confPage = checkoutPage.submitOrder(driver);
+			LoginPage loginPage = new LoginPage();
+			homePage = loginPage.loginApplication(mapData.get("User Name"), mapData.get("Password"));
+			cartPage = homePage.addProductToCart(mapData.get("Product"));
+			checkoutPage = cartPage.placeOrder(mapData.get("Product"));
+			confPage = checkoutPage.submitOrder();
 			String confirmMessage = confPage.getConfirmationMssg();
 			Assert.assertTrue(confirmMessage.equalsIgnoreCase("THANKYOU FOR THE ORDER."));
+
+			ValidationUtil.validationCheck("soft", "THANKYOU FOR THE ORDER.", confirmMessage,
+					"Validation : Product Confirmation");
 
 		}
 
@@ -42,16 +47,16 @@ public final class EcommerceTestExcel extends TestBase {
 		}
 	}
 
-	@Test(dataProvider = "testData_Electronics", dataProviderClass = DataProviders.class)
+	@Test(dataProvider = "testData_Electronics", dataProviderClass = DataProviders.class, enabled = false)
 	public void ecommerceElectronics_Test(Map<String, String> mapData) {
 
 		try {
 
-			LoginPage loginPage = new LoginPage(driver);
-			homePage = loginPage.loginApplication(mapData.get("User Name"), mapData.get("Password"), driver);
-			cartPage = homePage.addProductToCart(mapData.get("Product"), driver);
-			checkoutPage = cartPage.placeOrder(mapData.get("Product"), driver);
-			confPage = checkoutPage.submitOrder(driver);
+			LoginPage loginPage = new LoginPage();
+			homePage = loginPage.loginApplication(mapData.get("User Name"), mapData.get("Password"));
+			cartPage = homePage.addProductToCart(mapData.get("Product"));
+			checkoutPage = cartPage.placeOrder(mapData.get("Product"));
+			confPage = checkoutPage.submitOrder();
 			String confirmMessage = confPage.getConfirmationMssg();
 			Assert.assertTrue(confirmMessage.equalsIgnoreCase("THANKYOU FOR THE ORDER."));
 

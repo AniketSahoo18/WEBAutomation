@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import coreUtil.ReadPropertyFile;
+import coreUtil.PropertyUtil;
 import coreUtil.ValidationUtil;
 import testbase.TestBase;
 
@@ -21,12 +21,12 @@ public class DBConnection extends TestBase {
 
 		try {
 
-			Connection cn = DriverManager.getConnection(ReadPropertyFile.getValue("dbUrlWOName") + "map",
-					ReadPropertyFile.getValue("serverUserName"), ReadPropertyFile.getValue("serverPassword"));
+			Connection cn = DriverManager.getConnection(PropertyUtil.getValue("dbUrlWOName") + "map",
+					PropertyUtil.getValue("serverUserName"), PropertyUtil.getValue("serverPassword"));
 
 			Statement st = cn.createStatement();
 
-			ResultSet rs = st.executeQuery(ReadPropertyFile.getValue("queryMap"));
+			ResultSet rs = st.executeQuery(PropertyUtil.getValue("queryMap"));
 
 			while (rs.next()) {
 
@@ -59,12 +59,12 @@ public class DBConnection extends TestBase {
 
 		try {
 
-			Connection cn = DriverManager.getConnection(ReadPropertyFile.getValue("dbUrlWOName") + "library",
-					ReadPropertyFile.getValue("serverUserName"), ReadPropertyFile.getValue("serverPassword"));
+			Connection cn = DriverManager.getConnection(PropertyUtil.getValue("dbUrlWOName") + "library",
+					PropertyUtil.getValue("serverUserName"), PropertyUtil.getValue("serverPassword"));
 
 			Statement st = cn.createStatement();
 
-			ResultSet rs = st.executeQuery(ReadPropertyFile.getValue("queryLibrary"));
+			ResultSet rs = st.executeQuery(PropertyUtil.getValue("queryLibrary"));
 
 			while (rs.next()) {
 

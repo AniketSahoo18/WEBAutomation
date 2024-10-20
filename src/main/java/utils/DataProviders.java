@@ -1,14 +1,13 @@
 package utils;
 
 import java.io.IOException;
-
 import org.testng.annotations.DataProvider;
 
-import coreUtil.ExcelReportUtil;
+import reports.ExcelReportUtil;
 
 public class DataProviders {
 
-	@DataProvider(name = "testData_Fashion")
+	@DataProvider(name = "testData_Fashion", parallel = false)
 
 	public Object[][] ecommerceFashion() throws IOException {
 
@@ -17,7 +16,7 @@ public class DataProviders {
 		return data;
 	}
 
-	@DataProvider(name = "testData_Electronics")
+	@DataProvider(name = "testData_Electronics", parallel = false)
 
 	public Object[][] ecommerceElectronics() throws IOException {
 

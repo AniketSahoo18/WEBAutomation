@@ -1,26 +1,22 @@
 package webpages;
 
-import org.openqa.selenium.WebDriver;
-import testbase.WebPageFactory;
+import org.openqa.selenium.By;
+import enums.WaitStrategy;
 import utils.TestUtil;
 
 public class LoginPage extends TestUtil {
 
-	WebPageFactory wf;
+	private final By txtBoxEmail = By.id("userEmail");
+	private final By txtBoxPassword = By.id("userPassword");
+	private final By btnLogin = By.id("login");
 
-	public LoginPage(WebDriver driver) {
-
-		wf = new WebPageFactory(driver);
-
-	}
-
-	public HomePage loginApplication(String email, String password, WebDriver driver) {
+	public HomePage loginApplication(String email, String password) {
 
 		try {
 
-			sendKeys(wf.getUserEmail(), email);
-			sendKeys(wf.getUserPassword(), password);
-			click(wf.getSubmit());
+			sendKeys(txtBoxEmail, email, WaitStrategy.PRESENCE);
+			sendKeys(txtBoxPassword, password, WaitStrategy.PRESENCE);
+			click(btnLogin, WaitStrategy.CLICKABLE);
 
 		}
 
@@ -29,7 +25,7 @@ public class LoginPage extends TestUtil {
 			System.out.println("Fail Cause: " + e.getMessage());
 
 		}
-		return new HomePage(driver);
+		return new HomePage();
 	}
 
 }

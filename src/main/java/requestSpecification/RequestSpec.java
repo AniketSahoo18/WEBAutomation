@@ -2,7 +2,7 @@ package requestSpecification;
 
 import java.io.FileOutputStream;
 import java.io.PrintStream;
-import coreUtil.ReadPropertyFile;
+import coreUtil.PropertyUtil;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
@@ -18,7 +18,7 @@ public class RequestSpec extends TestBase {
 
 		if (req == null) {
 			PrintStream log = new PrintStream(new FileOutputStream("logging.txt"));
-			req = new RequestSpecBuilder().setBaseUri(ReadPropertyFile.getValue("baseUrl"))
+			req = new RequestSpecBuilder().setBaseUri(PropertyUtil.getValue("baseUrl"))
 					.addQueryParam("key", "qaclick123").addFilter(RequestLoggingFilter.logRequestTo(log))
 					.addFilter(ResponseLoggingFilter.logResponseTo(log)).setContentType(ContentType.JSON).build();
 			return req;
@@ -31,7 +31,7 @@ public class RequestSpec extends TestBase {
 
 		if (req == null) {
 			PrintStream log = new PrintStream(new FileOutputStream("logging.txt"));
-			req = new RequestSpecBuilder().setBaseUri(ReadPropertyFile.getValue("baseUrl"))
+			req = new RequestSpecBuilder().setBaseUri(PropertyUtil.getValue("baseUrl"))
 					.addFilter(RequestLoggingFilter.logRequestTo(log))
 					.addFilter(ResponseLoggingFilter.logResponseTo(log)).setContentType(ContentType.JSON).build();
 			return req;

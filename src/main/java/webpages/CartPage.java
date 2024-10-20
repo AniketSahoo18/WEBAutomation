@@ -1,30 +1,32 @@
 package webpages;
 
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.By;
 import org.testng.Assert;
-import testbase.WebPageFactory;
+import enums.WaitStrategy;
+import testbase.DriverManager;
+import utils.TestUtil;
 
-public class CartPage extends WebPageFactory {
+public class CartPage extends TestUtil {
 
-	public CartPage(WebDriver driver) {
-
-		super(driver);
-
-	}
-
-	public CheckoutPage placeOrder(String productName, WebDriver driver) {
+	private final By txtCartProducts = By.cssSelector(".cartSection h3");
+	private final By btnCheckout = By.cssSelector(".totalRow button");
+	
+	
+	public CheckoutPage placeOrder(String productName) {
 
 		try {
 
 			// Checking product is added in Cart
 
-			Boolean match = cartProducts.stream().anyMatch(cartProduct -> cartProduct.getText().equals(productName));
+			Boolean match = DriverManager.getDriver().findElements(txtCartProducts).stream()
+					.anyMatch(cartProduct -> cartProduct.getText().equals(productName));
+			
 
 			Assert.assertTrue(match);
 
 			// Checkout
 
-			checkout.click();
+			click(btnCheckout, WaitStrategy.CLICKABLE);
 
 		}
 
@@ -34,6 +36,6 @@ public class CartPage extends WebPageFactory {
 
 		}
 
-		return new CheckoutPage(driver);
+		return new CheckoutPage();
 	}
 }

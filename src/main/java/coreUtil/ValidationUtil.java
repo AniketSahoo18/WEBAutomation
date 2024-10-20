@@ -2,12 +2,10 @@ package coreUtil;
 
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
-
 import com.aventstack.extentreports.Status;
+import reports.ExtentManager;
 
-import listeners.TestListener;
-
-public class ValidationUtil extends TestListener {
+public class ValidationUtil {
 
 	public static void validationCheck(String softorHardAssert, String expectedResult, String actualResult,
 			String steps) {
@@ -67,12 +65,12 @@ public class ValidationUtil extends TestListener {
 
 				softAssert.assertEquals(validationStatus, true, steps + message);
 
-				TestListener.test.log(Status.PASS, steps + message);
+				ExtentManager.getExtentTest().log(Status.PASS, steps + message);
 			}
 
 			else {
 
-				TestListener.test.log(Status.FAIL, steps + message);
+				ExtentManager.getExtentTest().log(Status.FAIL, steps + message);
 
 				softAssert.assertEquals(validationStatus, true, steps + message);
 			}
@@ -89,7 +87,7 @@ public class ValidationUtil extends TestListener {
 
 		try {
 
-			TestListener.test.log(Status.INFO, steps);
+			ExtentManager.getExtentTest().log(Status.INFO, steps);
 		}
 
 		catch (Exception e) {
@@ -106,12 +104,12 @@ public class ValidationUtil extends TestListener {
 
 				Assert.assertEquals(validationStatus, true, steps);
 
-				TestListener.test.log(Status.PASS, steps);
+				ExtentManager.getExtentTest().log(Status.PASS, steps);
 			}
 
 			else {
 
-				TestListener.test.log(Status.FAIL, steps);
+				ExtentManager.getExtentTest().log(Status.FAIL, steps);
 
 				Assert.assertEquals(validationStatus, true, steps);
 			}

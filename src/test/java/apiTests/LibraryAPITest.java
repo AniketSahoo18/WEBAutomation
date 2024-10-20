@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import apiResources.APIResources;
 import apiResources.DBConnection;
 import apiResources.TestDataBuild;
-import coreUtil.ReadPropertyFile;
+import coreUtil.PropertyUtil;
 import coreUtil.ValidationUtil;
 import io.restassured.specification.RequestSpecification;
 import pojoResponse.AddBookResponse;
@@ -46,11 +46,11 @@ public class LibraryAPITest extends TestBase {
 
 			APIResources resourceAPI = APIResources.valueOf("AddBookAPI");
 
-			if (ReadPropertyFile.getValue("requestType").equalsIgnoreCase("POST"))
+			if (PropertyUtil.getValue("requestType").equalsIgnoreCase("POST"))
 				response = res.when().post(resourceAPI.getResource()).as(AddBookResponse.class);
-			else if (ReadPropertyFile.getValue("requestType").equalsIgnoreCase("GET"))
+			else if (PropertyUtil.getValue("requestType").equalsIgnoreCase("GET"))
 				response = res.when().get(resourceAPI.getResource()).as(AddBookResponse.class);
-			else if (ReadPropertyFile.getValue("requestType").equalsIgnoreCase("DELETE"))
+			else if (PropertyUtil.getValue("requestType").equalsIgnoreCase("DELETE"))
 				response = res.when().get(resourceAPI.getResource()).as(AddBookResponse.class);
 
 			String mssg = response.getMsg();
@@ -83,11 +83,11 @@ public class LibraryAPITest extends TestBase {
 
 			APIResources resourceAPI = APIResources.valueOf("AddBookAPI");
 
-			if (ReadPropertyFile.getValue("requestType").equalsIgnoreCase("POST"))
+			if (PropertyUtil.getValue("requestType").equalsIgnoreCase("POST"))
 				response = res.when().post(resourceAPI.getResource()).as(AddBookResponse.class);
-			else if (ReadPropertyFile.getValue("requestType").equalsIgnoreCase("GET"))
+			else if (PropertyUtil.getValue("requestType").equalsIgnoreCase("GET"))
 				response = res.when().get(resourceAPI.getResource()).as(AddBookResponse.class);
-			else if (ReadPropertyFile.getValue("requestType").equalsIgnoreCase("DELETE"))
+			else if (PropertyUtil.getValue("requestType").equalsIgnoreCase("DELETE"))
 				response = res.when().get(resourceAPI.getResource()).as(AddBookResponse.class);
 
 			String id = response.getID();
