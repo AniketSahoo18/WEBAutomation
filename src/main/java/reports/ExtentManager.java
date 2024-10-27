@@ -10,7 +10,7 @@ public class ExtentManager {
 
 	private static ThreadLocal<ExtentTest> exTest = new ThreadLocal<>();
 
-	public static ExtentTest getExtentTest() {
+	static ExtentTest getExtentTest() {
 
 		return exTest.get();
 	}
@@ -20,7 +20,7 @@ public class ExtentManager {
 		exTest.set(test);
 	}
 
-	public static void unload() {
+	static void unload() {
 
 		exTest.remove();
 	}

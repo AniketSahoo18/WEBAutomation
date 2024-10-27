@@ -1,8 +1,11 @@
 package pojoResponse;
 
-public class AddBookResponse {
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+public class AddBookResponse {
+	@JsonProperty
 	private String Msg;
+	@JsonProperty
 	private String ID;
 
 	public String getMsg() {

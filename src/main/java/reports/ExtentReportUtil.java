@@ -2,42 +2,34 @@ package reports;
 
 import java.awt.Desktop;
 import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
+import constants.FrameworkConstants;
+import coreUtil.PropertyUtil;
 
-import listeners.TestListener;
-
-public final class ExtentReportUtil extends TestListener {
-
-	private static String extentReportPath;
+public final class ExtentReportUtil {
 
 	public static ExtentReports getReport() {
 
 		ExtentReports extentReport = new ExtentReports();
 
-		String path = "D:\\Automation\\WEB\\UIReports\\";
-		String reportName = "ecommerce.html";
+		try {
 
-		String timeStamp = new SimpleDateFormat("dd-MM-yyyy-HH.mm.ss").format(new Date());
-		String folderName = "ExtentReports_" + timeStamp;
+			ExtentSparkReporter sparkReport = new ExtentSparkReporter(FrameworkConstants.getExtentreportpath());
 
-		File file = new File(path + folderName);
-		file.mkdir();
+			sparkReport.config().setDocumentTitle("Test Results");
+			sparkReport.config().setReportName(PropertyUtil.getValue("executionMode") + " Automation Result");
+			sparkReport.config().setTheme(Theme.DARK);
 
-		extentReportPath = path + folderName + "\\" + reportName;
+			extentReport.attachReporter(sparkReport);
 
-		ExtentSparkReporter sparkReport = new ExtentSparkReporter(extentReportPath);
+		}
 
-		sparkReport.config().setDocumentTitle("Test Results");
-		sparkReport.config().setReportName("UI Automation Result");
-		sparkReport.config().setTheme(Theme.DARK);
+		catch (Exception e) {
 
-		extentReport.attachReporter(sparkReport);
+			e.printStackTrace();
+		}
 
 		return extentReport;
 	}
@@ -47,9 +39,9 @@ public final class ExtentReportUtil extends TestListener {
 		try {
 
 			extentReport.flush();
-			Desktop.getDesktop().browse(new File(extentReportPath).toURI());
+			Desktop.getDesktop().browse(new File(FrameworkConstants.getExtentreportpath()).toURI());
 
-		} catch (IOException e) {
+		} catch (Exception e) {
 
 			e.printStackTrace();
 		}

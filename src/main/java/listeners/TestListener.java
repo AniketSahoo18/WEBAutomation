@@ -14,6 +14,7 @@ public class TestListener implements ITestListener {
 	public void onTestStart(ITestResult result) {
 
 		ExtentManager.setExtentTest(extentReports.createTest(result.getMethod().getMethodName()));
+
 	}
 
 	public void onFinish(ITestContext context) {

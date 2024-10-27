@@ -3,13 +3,12 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="guiTests.EcommerceTestExcel">
+      <class name="apiTests.LibraryAPITest">
         <methods>
-          <include name="tearDown"/>
-          <include name="ecommerceFashion_Test" invocation-numbers="0"/>
-          <include name="testPreReq"/>
+          <include name="test_ID" invocation-numbers="0"/>
+          <include name="test_Message" invocation-numbers="0"/>
         </methods>
-      </class> <!-- guiTests.EcommerceTestExcel -->
+      </class> <!-- apiTests.LibraryAPITest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

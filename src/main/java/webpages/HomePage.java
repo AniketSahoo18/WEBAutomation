@@ -2,6 +2,8 @@ package webpages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+
+import coreUtil.ValidationUtil;
 import enums.WaitStrategy;
 import testbase.DriverManager;
 import testbase.WaitFactory;
@@ -13,8 +15,8 @@ public class HomePage extends TestUtil {
 	private final By txtProduct = By.cssSelector("b");
 	private final By linkCart = By.cssSelector("[routerlink*='cart']");
 	private final By linkProduct = By.cssSelector(".card-body button:last-of-type");
-	private final By linkPopUp =By.cssSelector("#toast-container");
-	private final By linkAnimation =By.cssSelector(".ng-animating");
+	private final By linkPopUp = By.cssSelector("#toast-container");
+	private final By linkAnimation = By.cssSelector(".ng-animating");
 
 	public CartPage addProductToCart(String productName) {
 
@@ -29,13 +31,15 @@ public class HomePage extends TestUtil {
 
 //			TestUtil.explicitWait
 //					.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#toast-container")));
-			
+
 			WaitFactory.performExplicitWait(WaitStrategy.VISIBLE, linkPopUp);
 
 //			 ng-animating
 //			TestUtil.explicitWait.until(ExpectedConditions.invisibilityOf(ngAnimation));
-			
+
 			WaitFactory.performExplicitWait(WaitStrategy.INVISIBLE, linkAnimation);
+
+			ValidationUtil.stepInfo("Product Item Selected");
 
 			// Click Cart
 

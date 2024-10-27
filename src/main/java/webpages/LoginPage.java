@@ -1,6 +1,8 @@
 package webpages;
 
 import org.openqa.selenium.By;
+
+import coreUtil.ValidationUtil;
 import enums.WaitStrategy;
 import utils.TestUtil;
 
@@ -16,6 +18,7 @@ public class LoginPage extends TestUtil {
 
 			sendKeys(txtBoxEmail, email, WaitStrategy.PRESENCE);
 			sendKeys(txtBoxPassword, password, WaitStrategy.PRESENCE);
+			ValidationUtil.stepInfo("Login Page Filled");
 			click(btnLogin, WaitStrategy.CLICKABLE);
 
 		}

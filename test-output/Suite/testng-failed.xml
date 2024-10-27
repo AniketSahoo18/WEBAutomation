@@ -3,17 +3,16 @@
 <suite data-provider-thread-count="2" name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
   <listeners>
     <listener class-name="listeners.TestListener"/>
-    <listener class-name="listeners.AnnotationTransformer"/>
   </listeners>
   <test thread-count="5" name="Ecommerce Test(failed)">
     <classes>
-      <class name="guiTests.EcommerceTestExcel">
+      <class name="tests.gui.EcommerceTestExcel">
         <methods>
           <include name="setUp"/>
-          <include name="tearDown"/>
           <include name="ecommerceFashion_Test" invocation-numbers="0"/>
+          <include name="tearDown"/>
         </methods>
-      </class> <!-- guiTests.EcommerceTestExcel -->
+      </class> <!-- tests.gui.EcommerceTestExcel -->
     </classes>
   </test> <!-- Ecommerce Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

@@ -2,16 +2,16 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-10-20T16:24:16 IST" name="Suite" finished-at="2024-10-20T16:24:38 IST" duration-ms="22081">
+  <suite started-at="2024-10-27T16:22:31 IST" name="Suite" finished-at="2024-10-27T16:22:55 IST" duration-ms="23814">
     <groups>
     </groups>
-    <test started-at="2024-10-20T16:24:16 IST" name="Ecommerce Test" finished-at="2024-10-20T16:24:38 IST" duration-ms="22081">
-      <class name="guiTests.EcommerceTestExcel">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:guiTests.EcommerceTestExcel@6ee6f53]" started-at="2024-10-20T16:24:18 IST" name="setUp" finished-at="2024-10-20T16:24:22 IST" duration-ms="3998" status="PASS">
+    <test started-at="2024-10-27T16:22:31 IST" name="Ecommerce Test" finished-at="2024-10-27T16:22:55 IST" duration-ms="23814">
+      <class name="tests.gui.EcommerceTestExcel">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:tests.gui.EcommerceTestExcel@5d12a356]" started-at="2024-10-27T16:22:33 IST" name="setUp" finished-at="2024-10-27T16:22:37 IST" duration-ms="4047" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="ecommerceFashion_Test(java.util.Map)[pri:0, instance:guiTests.EcommerceTestExcel@6ee6f53]" started-at="2024-10-20T16:24:22 IST" name="ecommerceFashion_Test" data-provider="testData_Fashion" finished-at="2024-10-20T16:24:38 IST" duration-ms="15598" status="PASS">
+        <test-method signature="ecommerceFashion_Test(java.util.Map)[pri:0, instance:tests.gui.EcommerceTestExcel@5d12a356]" started-at="2024-10-27T16:22:37 IST" name="ecommerceFashion_Test" data-provider="testData_Fashion" finished-at="2024-10-27T16:22:54 IST" duration-ms="17188" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -22,11 +22,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- ecommerceFashion_Test -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:guiTests.EcommerceTestExcel@6ee6f53]" started-at="2024-10-20T16:24:38 IST" name="tearDown" finished-at="2024-10-20T16:24:38 IST" duration-ms="371" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.gui.EcommerceTestExcel@5d12a356]" started-at="2024-10-27T16:22:54 IST" name="tearDown" finished-at="2024-10-27T16:22:55 IST" duration-ms="353" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-      </class> <!-- guiTests.EcommerceTestExcel -->
+      </class> <!-- tests.gui.EcommerceTestExcel -->
     </test> <!-- Ecommerce Test -->
   </suite> <!-- Suite -->
 </testng-results>

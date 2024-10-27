@@ -2,8 +2,7 @@ package coreUtil;
 
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
-import com.aventstack.extentreports.Status;
-import reports.ExtentManager;
+import reports.ExtentLogger;
 
 public class ValidationUtil {
 
@@ -28,7 +27,7 @@ public class ValidationUtil {
 
 		else {
 
-			validation(false, "NO Condition is Matching in Validation Check!!");
+			Assert.assertTrue(false, "NO Condition is Matching in Validation Check!!");
 		}
 
 	}
@@ -65,12 +64,28 @@ public class ValidationUtil {
 
 				softAssert.assertEquals(validationStatus, true, steps + message);
 
-				ExtentManager.getExtentTest().log(Status.PASS, steps + message);
+				// ScreenshotNeeded - true, Otherwise false
+				if (PropertyUtil.getValue("executionMode").equalsIgnoreCase("GUI")) {
+
+					ExtentLogger.pass(steps, message, true);
+
+				} else {
+
+					ExtentLogger.pass(steps, message);
+				}
 			}
 
 			else {
 
-				ExtentManager.getExtentTest().log(Status.FAIL, steps + message);
+				// ScreenshotNeeded - true, Otherwise false
+				if (PropertyUtil.getValue("executionMode").equalsIgnoreCase("GUI")) {
+
+					ExtentLogger.fail(steps, message, true);
+
+				} else {
+
+					ExtentLogger.fail(steps, message);
+				}
 
 				softAssert.assertEquals(validationStatus, true, steps + message);
 			}
@@ -83,11 +98,19 @@ public class ValidationUtil {
 		}
 	}
 
-	public static void validationInfo(String steps) {
+	public static void stepInfo(String steps) {
 
 		try {
 
-			ExtentManager.getExtentTest().log(Status.INFO, steps);
+			// ScreenshotNeeded - true, Otherwise false
+			if (PropertyUtil.getValue("executionMode").equalsIgnoreCase("GUI")) {
+
+				ExtentLogger.info(steps, true);
+
+			} else {
+
+				ExtentLogger.info(steps);
+			}
 		}
 
 		catch (Exception e) {
@@ -96,29 +119,4 @@ public class ValidationUtil {
 		}
 	}
 
-	public static void validation(boolean validationStatus, String steps) {
-
-		try {
-
-			if (validationStatus) {
-
-				Assert.assertEquals(validationStatus, true, steps);
-
-				ExtentManager.getExtentTest().log(Status.PASS, steps);
-			}
-
-			else {
-
-				ExtentManager.getExtentTest().log(Status.FAIL, steps);
-
-				Assert.assertEquals(validationStatus, true, steps);
-			}
-
-		}
-
-		catch (Exception e) {
-
-			Assert.assertTrue(false);
-		}
-	}
 }
